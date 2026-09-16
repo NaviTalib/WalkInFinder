@@ -12,12 +12,13 @@ const authRoutes = require("./routes/auth");
 const app = express();
 
 // Middleware
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",             // Keep this for local testing
+    "https://walk-in-finder.vercel.app"  // Add your live Vercel frontend URL here
+  ],
+  credentials: true
+}));
 
 app.use(express.json());
 
