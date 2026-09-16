@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../api";
 import { PlusCircle, User, LogOut, Menu, X } from "lucide-react";
 
 export default function Navbar({ user, setUser }) {
@@ -8,10 +9,8 @@ export default function Navbar({ user, setUser }) {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:5000/auth/logout", {
-        credentials: "include",
-      });
-      if (res.ok) {
+      const res = await API.get("/auth/logout");
+      if (res.status === 200 || res.data) {
         setUser(null);
         setIsOpen(false);
         navigate("/login");
@@ -25,12 +24,37 @@ export default function Navbar({ user, setUser }) {
     <nav className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-md shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6">
         
-        {/* Logo */}
-        <Link to="/" className="text-xl sm:text-2xl font-bold tracking-tight text-indigo-600">
-          WalkInFinder
+        {/* SVG Logo with React-compliant camelCase attributes */}
+        <Link to="/" className="flex items-center group focus:outline-none">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 340 75" 
+            className="h-11 sm:h-12 w-auto transition-transform duration-200 group-hover:scale-105"
+          >
+            <defs>
+              <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#4f46e5" />
+                <stop offset="100%" stopColor="#9333ea" />
+              </linearGradient>
+            </defs>
+            
+            <g transform="translate(6, 6)">
+              <rect x="0" y="0" width="63" height="63" rx="16" fill="url(#brandGrad)" />
+              <circle cx="26.5" cy="25" r="9" fill="none" stroke="white" strokeWidth="4" />
+              <line x1="33" y1="32" x2="44" y2="43" stroke="white" strokeWidth="4" strokeLinecap="round" />
+              <circle cx="26.5" cy="25" r="3" fill="white" opacity="0.4" />
+            </g>
+
+            <text x="84" y="38" fontFamily="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fontSize="27" fontWeight="800" fill="#0f172a" letterSpacing="-0.5">
+              WalkIn<tspan fill="#4f46e5">Finder</tspan>
+            </text>
+            <text x="86" y="56" fontFamily="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fontSize="11.5" fontWeight="700" fill="#64748b" letterSpacing="1.8">
+              VERIFIED DRIVES
+            </text>
+          </svg>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation (Matched to standard app routes) */}
         <div className="hidden items-center gap-6 md:flex">
           <Link to="/" className="text-sm font-medium text-gray-600 transition hover:text-indigo-600">
             Home
