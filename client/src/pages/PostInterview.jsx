@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import API from "../api"; // Import centralized API client
 import { useNavigate, Link } from "react-router-dom";
 import { Loader2, PlusCircle, Building2, MapPin, Calendar, Clock, IndianRupee, Briefcase, GraduationCap, Code, FileText, AlignLeft, Globe, ShieldAlert } from "lucide-react";
 
@@ -53,8 +53,8 @@ export default function PostInterview({ user }) {
     setLoading(true);
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/interviews",
+      await API.post(
+        "/api/interviews",
         {
           ...form,
           date: new Date(form.date).toISOString(),
@@ -66,9 +66,6 @@ export default function PostInterview({ user }) {
             .split(",")
             .map((document) => document.trim())
             .filter(Boolean),
-        },
-        {
-          withCredentials: true,
         }
       );
 

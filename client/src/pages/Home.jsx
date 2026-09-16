@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api"; // Import centralized API client
 import SearchBar from "../components/SearchBar";
 import InterviewCard from "../components/InterviewCard";
 import { Briefcase, Loader2, SearchX } from "lucide-react";
@@ -16,9 +16,7 @@ export default function Home() {
 
   const fetchInterviews = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/interviews"
-      );
+      const response = await API.get("/api/interviews");
       setInterviews(response.data);
     } catch (error) {
       console.error("Error fetching interviews:", error);

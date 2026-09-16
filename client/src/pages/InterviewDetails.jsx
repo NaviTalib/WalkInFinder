@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import API from "../api"; // Import centralized API client
 import {
   MapPin,
   Calendar,
@@ -29,9 +29,7 @@ export default function InterviewDetails() {
 
   const fetchInterview = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/interviews/${id}`
-      );
+      const response = await API.get(`/api/interviews/${id}`);
       setInterview(response.data);
     } catch (error) {
       console.error(error);

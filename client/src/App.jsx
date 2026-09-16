@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import API from "./api"; // Import centralized API client
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -12,20 +13,11 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is logged in on initial load
+  // Check if user is logged in on initial load using centralized API client
   useEffect(() => {
-    fetch("http://localhost:5000/auth/user", {
-      credentials: "include",
-    })
+    API.get("/auth/user")
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return null;
-      })
-      .then((data) => {
-        if (data) setUser(data);
-        else setUser(null);
+        setUser(res.data);
       })
       .catch(() => {
         setUser(null);
