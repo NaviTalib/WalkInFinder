@@ -1,8 +1,3 @@
-Here is a professional, comprehensive **GitHub README.md** tailored for **WalkInFinder**. You can copy this directly and save it as `README.md` in your project's root folder.
-
----
-
-```markdown
 # 🔍 WalkInFinder
 
 > Your trusted platform to discover verified walk-in interviews, corporate job drives, and career growth opportunities near you.
@@ -101,7 +96,7 @@ npm run dev
 **Navi Talib**
 
 * Portfolio: [navi-talib.vercel.app](https://navi-talib.vercel.app/)
-* GitHub: [@your-github-username](https://github.com/)
+* GitHub: [@navitalib](https://github.com/navitalib)
 
 ---
 
