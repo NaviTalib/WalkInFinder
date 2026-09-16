@@ -14,9 +14,11 @@ import Profile from "./pages/Profile";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  // Check if user is logged in on initial load using centralized API client
+  // Check if user is logged in on initial load using centralized API client.
+  // This now runs in the background instead of blocking the whole app —
+  // Navbar/Home/Footer render immediately with real content, and `user`
+  // just updates once the check resolves.
   useEffect(() => {
     API.get("/auth/user")
       .then((res) => {
@@ -24,17 +26,8 @@ export default function App() {
       })
       .catch(() => {
         setUser(null);
-      })
-      .finally(() => setLoading(false));
+      });
   }, []);
-
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center text-sm font-medium text-gray-500">
-        Loading session...
-      </div>
-    );
-  }
 
   return (
     <BrowserRouter>
