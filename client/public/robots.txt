@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Point search engines to your sitemap (uncomment and update if you have one)
+# Sitemap: https://walk-in-finder.vercel.app/sitemap.xml
